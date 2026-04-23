@@ -1,0 +1,39 @@
+let input = document.getElementById("password");
+let bar = document.getElementById("bar");
+
+input.addEventListener("input", checkPassword);
+
+function checkPassword() {
+    let pass = input.value;
+    let strength = "Weak";
+
+    if (pass.length > 8 && /[A-Z]/.test(pass) && /\d/.test(pass) && /[@$!%*?&]/.test(pass)) {
+        strength = "Strong 💪";
+        bar.style.width = "100%";
+        bar.style.background = "green";
+    } 
+    else if (pass.length >= 6) {
+        strength = "Medium 😐";
+        bar.style.width = "60%";
+        bar.style.background = "orange";
+    } 
+    else {
+        strength = "Weak 😢";
+        bar.style.width = "30%";
+        bar.style.background = "red";
+    }
+
+    document.getElementById("result").innerText = strength;
+
+    if(pass.length > 0){
+        document.getElementById("suggest").innerText =
+            "Suggestion: " + pass + "@2026!";
+    } else {
+        document.getElementById("suggest").innerText = "";
+    }
+}
+
+function toggle() {
+    let field = document.getElementById("password");
+    field.type = field.type === "password" ? "text" : "password";
+}
